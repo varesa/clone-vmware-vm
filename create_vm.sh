@@ -124,7 +124,9 @@ echo "- setting authorized_keys"
 cat "$sshkeys" > "${mountpoint}/root/.ssh/authorized_keys"
 chmod 600 "${mountpoint}/root/.ssh/authorized_keys"
 
-echo "- removing passwords (TODO)"
+echo "- removing preset passwords"
+# $n$xxx -> !
+sed -i 's/\$[^:]\+/!/' "${mountpoint}/etc/shadow"
 
 echo "- unmounting"
 umount "$mountpoint"
