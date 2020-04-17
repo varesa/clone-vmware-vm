@@ -104,7 +104,7 @@ echo "- regenerating SSH keys"
 ssh-keygen -q -t rsa     -f "${mountpoint}/etc/ssh/ssh_host_rsa_key"     -C '' -N '' #>&/dev/null
 ssh-keygen -q -t ecdsa   -f "${mountpoint}/etc/ssh/ssh_host_ecdsa_key"   -C '' -N '' #>&/dev/null
 ssh-keygen -q -t ed25519 -f "${mountpoint}/etc/ssh/ssh_host_ed25519_key" -C '' -N '' #>&/dev/null
-chmod 640 "${mountpoint}/etc/ssh/ssh_host_"*
+chmod 600 "${mountpoint}/etc/ssh/ssh_host_"*
 
 echo "- setting network configuration"
 cat << EOF > "${mountpoint}/etc/network/interfaces"
@@ -121,9 +121,6 @@ iface eth0 inet static
 EOF
 
 echo "- setting authorized_keys"
-mkdir "${mountpoint}/root/.ssh"
-chmod 700 "${mountpoint}/root/.ssh"
-
 cat "$sshkeys" > "${mountpoint}/root/.ssh/authorized_keys"
 chmod 600 "${mountpoint}/root/.ssh/authorized_keys"
 
