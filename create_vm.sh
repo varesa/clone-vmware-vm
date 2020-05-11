@@ -86,6 +86,7 @@ echo ""
 #
 # Mount image for modifications
 
+echo "Mounting disk image"
 mountpoint="$(mktemp -d)"
 guestmount -i -a "$root_disk" "$mountpoint"
 
